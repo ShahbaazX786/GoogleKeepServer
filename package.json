@@ -2,11 +2,10 @@
   "name": "googlekeepserver",
   "version": "1.0.0",
   "description": "Backend for Google Keep Clone.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev":"nodemon server.js",
-    "prod":"node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod":"node server.js"
   },
   "repository": {
     "type": "git",

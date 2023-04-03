@@ -1,3 +1,8 @@
+CL-1.03: MongoDB Atlas setup.
+- Added mongodb atlas connection.
+- Added DB URI strings in .env file.
+- Updated package.json scripts.
+
 CL-1.02: Project structure setup.
 - Added MVC(Model(Routes),View(Routes),Controller(Controllers)) structure for the project.
 - Improved the server listener log using dynamic port.
