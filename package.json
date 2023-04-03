@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Google Keep Clone.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev":"nodemon server.js",
     "prod":"node server.js"

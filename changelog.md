@@ -1,3 +1,10 @@
+CL-1.04: Code splitting.
+- Split the code into MVCD (Model-View-Controller-Database) structure
+- Added mongoose models folder.
+- Added Routes folder for users.
+- Added controllers for logic separation.
+- Added User schema and model.
+
 CL-1.03: MongoDB Atlas setup.
 - Added mongodb atlas connection.
 - Added DB URI strings in .env file.
