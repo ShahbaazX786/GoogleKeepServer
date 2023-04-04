@@ -1,25 +1,46 @@
 import { User } from "../models/User.js";
+import { HashMyPassword, sendMyCookie, verifyMyPassword } from "../Utils/features.js";
 
 export const register = async(req,res)=>{
     const {name,email,password} = req.body;
-    await User.create({
-        name,email,password
-    });
-    res.status(201).json({
-        success:true,
-        message:'New User Registered Sucessfully'
-    });
+
+    let user = await User.findOne({email});
+    if(user){
+        return res.status(403).json({
+            success:false,
+            message:'User with same Email already Exists'
+        });
+    }
+    else{
+        const hashedPassword = HashMyPassword();
+        let user = await User.create({
+            name,email,password:hashedPassword
+        });
+        sendMyCookie(user,res,"User Registered Sucessfully",201);
+    }
 }
 
 export const login = async(req,res)=>{
-    const {name,email,password} = req.body;
-    await User.find({
-        name,email,password
-    });
-    res.status(201).json({
-        success:true,
-        message:'User Already Exists'
-    });
+    const {email,password} = req.body;
+    const user = await User.findOne({email});
+    if(!user){
+        return res.status(404).json({
+            success:false,
+            message:'User Doesn\'t Exist!'
+        });
+    }
+    else{
+        const isValid = verifyMyPassword(password,user);
+        if(!isValid){
+            return res.status(404).json({
+                success: false,
+                message: 'Invalid Credentials, Kindly Retry'
+            });
+        }
+        else{
+            sendMyCookie(user,res,`Welcome back ${user.name}`,200);
+        }
+    }
 }
 
 export const getAllUsers = async(req,res)=>{

@@ -1,3 +1,7 @@
+CL-1.08: Improving login, registering api's
+- Added Utilities file which will have all the required small utility functions.
+- Added usage of  bcrypt hashing and jwt cookies.
+
 CL-1.07: Creating Task api.
 - Updated User, Task schemas.
 
