@@ -1,3 +1,11 @@
+CL-1.05: Adding and testing api's.
+- Added login logic.
+- Added login controller.
+- Added login route.
+- Added register logic.
+- Added getallusers logic.
+
+
 CL-1.04: Code splitting.
 - Split the code into MVCD (Model-View-Controller-Database) structure
 - Added mongoose models folder.

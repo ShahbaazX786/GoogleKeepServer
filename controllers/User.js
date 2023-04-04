@@ -10,6 +10,16 @@ export const register = async(req,res)=>{
         message:'New User Registered Sucessfully'
     });
 }
+export const login = async(req,res)=>{
+    const {name,email,password} = req.body;
+    await User.find({
+        name,email,password
+    });
+    res.status(201).json({
+        success:true,
+        message:'User Already Exists'
+    });
+}
 
 export const getAllUsers = async(req,res)=>{
     const users = await User.find({});
