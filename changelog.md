@@ -1,3 +1,7 @@
+CL-1.06: Creating Task api.
+- Added Task MVC with 3 routes(endpoints).
+- Tested aswell.
+
 CL-1.05: Adding and testing api's.
 - Added login logic.
 - Added login controller.

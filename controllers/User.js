@@ -10,6 +10,7 @@ export const register = async(req,res)=>{
         message:'New User Registered Sucessfully'
     });
 }
+
 export const login = async(req,res)=>{
     const {name,email,password} = req.body;
     await User.find({

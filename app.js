@@ -1,5 +1,6 @@
 import express from 'express';
 import UserRouter from './routes/UserRoutes.js';
+import TaskRouter from './routes/TaskRoutes.js';
 import { config } from "dotenv";
 
 
@@ -12,6 +13,7 @@ config({
 //middlewares
 app.use(express.json());
 app.use('/users',UserRouter);
+app.use('/tasks',TaskRouter);
 
 
 
