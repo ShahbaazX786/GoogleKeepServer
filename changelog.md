@@ -1,3 +1,6 @@
+CL-1.07: Creating Task api.
+- Updated User, Task schemas.
+
 CL-1.06: Creating Task api.
 - Added Task MVC with 3 routes(endpoints).
 - Tested aswell.
