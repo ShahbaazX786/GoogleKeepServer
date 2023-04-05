@@ -1,3 +1,7 @@
+CL-1.09: Deploying node server.
+- Trying to deploy the server in render
+- Trying to fix the server errors in render
+
 CL-1.08: Improving login, registering api's
 - Added Utilities file which will have all the required small utility functions.
 - Added usage of  bcrypt hashing and jwt cookies.
