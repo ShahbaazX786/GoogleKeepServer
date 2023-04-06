@@ -2,6 +2,7 @@ import express from 'express';
 import UserRouter from './routes/UserRoutes.js';
 import TaskRouter from './routes/TaskRoutes.js';
 import { config } from "dotenv";
+import cookieParser from 'cookie-parser';
 
 
 export const app = express();
@@ -11,9 +12,10 @@ config({
 });
 
 //middlewares
-app.use(express.json());
-app.use('/users',UserRouter);
-app.use('/tasks',TaskRouter);
+app.use(express.json());    
+app.use(cookieParser());
+app.use('/api/v1/users',UserRouter);
+app.use('/api/v1/tasks',TaskRouter);
 
 
 

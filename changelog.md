@@ -1,3 +1,10 @@
+CL-1.10: Deploying node server.
+- updated api path to api/v1 for all routes
+- installed and used cookie parser.
+- Updated user and task routes.
+- Updated user and task models.
+- Updated controllers and utils.
+
 CL-1.09: Deploying node server.
 - Trying to deploy the server in render
 - Trying to fix the server errors in render

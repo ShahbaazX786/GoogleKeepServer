@@ -6,7 +6,10 @@ const taskSchema = new mongoose.Schema({
         required: false
     },
     description:String,
-    status:String,
+    status:{
+        type:Boolean,
+        default:false
+    },
     isTrashed: {
         type: Boolean,
         default: false
@@ -20,6 +23,11 @@ const taskSchema = new mongoose.Schema({
         type:Date,
         required:true,
         default:Date.now
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true
     }
 });
 

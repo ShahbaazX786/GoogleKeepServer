@@ -1,12 +1,14 @@
 import Express  from "express";
-import { getAllUsers, register, login } from "../controllers/User.js";
+import { getAllUsers, register, login, logout } from "../controllers/User.js";
 
 const Router = Express.Router();
 
 Router.get('/', getAllUsers);
 
-Router.post('/new', register);
+Router.post('/register', register);
 
-Router.post('/old', login);
+Router.post('/login', login);
+
+Router.get('/logout', logout);
 
 export default Router;

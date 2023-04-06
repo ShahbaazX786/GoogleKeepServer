@@ -14,10 +14,10 @@ export const sendMyCookie = (user,res,message,statusCode) =>{
 }
 
 export const HashMyPassword = async(password) =>{
-    const hashedPassword = await bcrypt.hash(password, 10);
+    return await bcrypt.hash(password, 10);
 
 }
 
 export const verifyMyPassword = async(password, user)=>{
-    const valid = await bcrypt.compare(password, user.password);
+    return await bcrypt.compare(password, user.password);
 }

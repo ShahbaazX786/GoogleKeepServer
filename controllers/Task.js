@@ -11,19 +11,28 @@ export const getAllTasks = async (req, res) => {
 
 
 export const createNewTask = async (req, res) => {
-    const { title, description, status } = req.body;
-    await Task.create({
-        title,description,status
-    });
-    res.status(201).json({
-        success: true,
-        message: 'New Task Created Sucessfully'
-    });
+    const { token } = req.cookies;
+    if (!token) {
+        return res.status(404).json({
+            success: false,
+            message: "Please Login first"
+        });
+    }
+    else{
+        const { title, description } = req.body;
+        await Task.create({
+            title,description,user:req.user
+        });
+        res.status(201).json({
+            success: true,
+            message: 'Created New Task'
+        });
+    }
 }
 
 export const getTaskById = async (req, res) => {
-    const { id } = req.body._id;
-    await Task.find({
+    const { id } = req.body.id;
+    await Task.findOne({
         _id:id
     });
     res.status(200).json({
