@@ -1,3 +1,7 @@
+CL-1.11: Deploying node server.
+- Imported cors middleware.
+- Added cors to enable http requests without errors.
+
 CL-1.10: Deploying node server.
 - updated api path to api/v1 for all routes
 - installed and used cookie parser.
