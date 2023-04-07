@@ -1,3 +1,11 @@
+CL-1.12: Fixing bugs and improvements
+- Updated description in Readme file.
+- Moved nodemon to devdependencies.
+- Found out the hard way that the async and await smaller feature functions were not working for some promise unresolved reason.
+- So moved them out in to the code directly in user.js controller file.
+- WOrking goood now are: /, /register, /login, /logout, /me.
+- Modified logout to work better now.
+
 CL-1.11: Deploying node server.
 - Imported cors middleware.
 - Added cors to enable http requests without errors.

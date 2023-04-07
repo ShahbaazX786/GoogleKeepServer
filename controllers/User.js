@@ -1,5 +1,6 @@
 import { User } from "../models/User.js";
-import { HashMyPassword, sendMyCookie, verifyMyPassword } from "../Utils/features.js";
+import bcrypt from 'bcrypt';
+import { sendMyCookie } from "../Utils/features.js";
 
 export const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -11,13 +12,13 @@ export const register = async (req, res) => {
             message: 'User with same Email already Exists'
         });
     }
-    else {
-        const hashedPassword = HashMyPassword(password);
+    else{
+        const hashedPassword = await bcrypt.hash(password,10);
         user = await User.create({
             name, email, password: hashedPassword
         });
-        sendMyCookie(user, res, "User Registered Sucessfully", 201);
-    };
+        sendMyCookie(user, res, "User Registered Sucessfully!", 201);
+    }
 }
 
 export const login = async (req, res) => {
@@ -30,7 +31,7 @@ export const login = async (req, res) => {
         });
     }
     else {
-        const isValid = verifyMyPassword(password, user);
+        const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
             return res.status(404).json({
                 success: false,
@@ -44,13 +45,22 @@ export const login = async (req, res) => {
 }
 
 
-export const logout = async(req,res) =>{
-    const { token } = req.cookies;
-    await res.status(200).cookie("token","",{expires:new Date(Date.now())}).json({
-        success: true,
-        message:"User logged out sucessfully"
-    });
-}
+export const logout = async (req, res) => {
+    const {token} = req.cookies;
+    if(token != undefined){
+        console.log(token);
+        await res.status(200).cookie("token", "", { expires: new Date(Date.now()) }).json({
+            success: true,
+            message: "User logged out sucessfully",
+          });
+    }
+    else{
+        await res.status(200).json({
+            success:false,
+            message:"You are already logged out mate!"
+        })
+    }
+};
 
 
 export const getAllUsers = async (req, res) => {
@@ -71,3 +81,10 @@ export const getAllUsers = async (req, res) => {
         });
     }
 }
+
+export const getUserById = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    user:req.user,
+  });
+};
