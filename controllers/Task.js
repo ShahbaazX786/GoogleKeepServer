@@ -1,37 +1,49 @@
-import { Task } from "../models/Task.js"
+import { Task } from "../models/Task.js";
+import ErrorHandler from "../middlewares/error.js";
 
-export const getAllTasks = async (req, res) => {
-    const tasks = await Task.find({});
+export const getAllTasks = async (req, res, next) => {
+  const tasks = await Task.find({});
+  if (!tasks)
+    return next(new ErrorHandler("There are currently No Tasks!", 404));
 
-    res.status(200).json({
-        success: true,
-        tasks,
-    });
-}
+  res.status(200).json({
+    success: true,
+    tasks,
+  });
+};
 
-export const getUserTasks = async (req, res) => {
-    const userId  = req.user._id;
-    const tasks = await Task.find({
-        user:userId
-    });
-    res.status(200).json({
-        success: true,
-        tasks,
-    });
-}
+export const getUserTasks = async (req, res, next) => {
+  const userId = req.user._id;
+  const tasks = await Task.find({
+    user: userId,
+  });
+  if (!tasks)
+    return next(new ErrorHandler("There are currently No Tasks!", 404));
 
+  res.status(200).json({
+    success: true,
+    tasks,
+  });
+};
 
-export const getTaskById = async (req, res) => {
-    const  id  = req.params.id;
-    const task = await Task.findOne({
-        _id:id
-    });
-    res.status(200).json({
-        success: true,
-        task,
-    });
-}
+export const getTaskById = async (req, res, next) => {
+  const id = req.params.id;
+  const task = await Task.findOne({
+    _id: id,
+  });
+  if (!task)
+    return next(
+      new ErrorHandler(
+        "The Task you are looking for is Either Deleted or Doesn't Exist!",
+        404
+      )
+    );
 
+  res.status(200).json({
+    success: true,
+    task,
+  });
+};
 
 export const createNewTask = async (req, res) => {
   const { title, description } = req.body;
@@ -63,7 +75,7 @@ export const updateTask = async (req, res, next) => {
   }
 };
 
-export const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res, next) => {
   const { id } = req.params;
   const task = await Task.findById({
     _id: id,

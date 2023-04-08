@@ -1,3 +1,12 @@
+CL-1.14: Fixing bugs and improvements
+- Added error middleware and used its class to define custom message and statuscode across id routes.
+- added default export for errorhandler class in errormiddleware file.
+- Added errorHandling for User and task Routes as well.
+- Added NODE_ENV variable to ensure we get sameSite and lax options of cookies in dev mode only for same site..
+  - Basically sameSite:lax(it is default) means we can call via localhost://5000/ and get cookies in its application tab in chrome.
+  - Suppose we keep sameSite:none means cookie won't be generated in same URL but secure:true must be enabled to ensure the cookies data is secure in different website URLS.
+- Modified the logout,sendMyCookie logic to support the above change.
+
 CL-1.13: Fixing bugs and improvements
 - created new routes for tasks.
 - created route chaining for put,delete,get for id.

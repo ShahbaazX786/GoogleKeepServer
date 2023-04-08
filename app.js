@@ -21,6 +21,8 @@ app.use(
     origin: [process.env.FRONTEND_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
+    sameSite: process.env.NODE_ENV === "dev" ? "lax" : "none",
+    secure: process.env.NODE_ENV === "dev" ? false : true,
   })
 );
 
