@@ -1,3 +1,8 @@
+CL-1.13: Fixing bugs and improvements
+- created new routes for tasks.
+- created route chaining for put,delete,get for id.
+- created errormiddleware to handle unknown methods acccess.
+
 CL-1.12: Fixing bugs and improvements
 - Updated description in Readme file.
 - Moved nodemon to devdependencies.

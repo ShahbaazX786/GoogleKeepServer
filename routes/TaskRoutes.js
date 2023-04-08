@@ -1,16 +1,15 @@
 import Express from "express";
-import { getAllTasks, createNewTask, getTaskById } from "../controllers/Task.js"
+import { isAuth } from "../middlewares/authenticator.js";
+import { getAllTasks, createNewTask, getTaskById, getUserTasks, updateTask, deleteTask } from "../controllers/Task.js"
 
 const Router = Express.Router();
 
-Router.get('/', getAllTasks);
+Router.get('/', isAuth, getAllTasks);
 
-Router.post('/new', createNewTask);
+Router.get('/mytasks', isAuth, getUserTasks);
 
-Router.post('/:id', getTaskById);
+Router.post('/new', isAuth, createNewTask);
 
-// Router.post('/old', deleteTask);
-
-// Router.post('/old', updateTask);
+Router.route('/:id').get(isAuth, getTaskById).put(isAuth, updateTask).delete(isAuth, deleteTask);
 
 export default Router;

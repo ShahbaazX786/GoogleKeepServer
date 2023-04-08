@@ -4,6 +4,7 @@ import TaskRouter from "./routes/TaskRoutes.js";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { errorMiddleware } from "./middlewares/error.js";
 
 export const app = express();
 
@@ -26,6 +27,7 @@ app.use(
 // using express routes
 app.use("/api/v1/users", UserRouter);
 app.use("/api/v1/tasks", TaskRouter);
+app.use(errorMiddleware);
 
 // default home route
 app.get("/", (req, res) => {

@@ -22,6 +22,7 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
+    const {token} = req.cookies;
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
@@ -30,7 +31,7 @@ export const login = async (req, res) => {
             message: 'User Doesn\'t Exist!'
         });
     }
-    else {
+    else if(token===undefined) {
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
             return res.status(404).json({
@@ -42,13 +43,19 @@ export const login = async (req, res) => {
             sendMyCookie(user, res, `Welcome back ${user.name}`, 200);
         }
     }
+    else{
+        return res.status(404).json({
+            success:false,
+            message:'You are already logged In!'
+        })
+    }
 }
 
 
 export const logout = async (req, res) => {
     const {token} = req.cookies;
     if(token != undefined){
-        console.log(token);
+        // console.log(token);
         await res.status(200).cookie("token", "", { expires: new Date(Date.now()) }).json({
             success: true,
             message: "User logged out sucessfully",
@@ -82,7 +89,7 @@ export const getAllUsers = async (req, res) => {
     }
 }
 
-export const getUserById = async (req, res) => {
+export const getUserById = (req, res) => {
   res.status(200).json({
     success: true,
     user:req.user,
